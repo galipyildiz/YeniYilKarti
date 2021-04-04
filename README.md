@@ -5,3 +5,4 @@
 - https://rvera.github.io/image-picker/
 - https://github.com/tsayen/dom-to-image
 - https://stackoverflow.com/questions/41945094/add-option-to-view-source-of-current-html-page
+- https://bootsnipp.com/snippets/Bq1eE (Card Template)
