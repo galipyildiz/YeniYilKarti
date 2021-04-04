@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>404 - Not Found</title>
+    <style>
+        .cizik {
+            background-color: black;
+            height: 1rem;
+            width: 90%;
+            margin-bottom: 5px;
+        }
+
+        .yuvarlak {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+        }
+
+        .er {
+            font-size: 144px;
+            font-weight: bold;
+            font-family: Arial;
+        }
+
+        .cong {
+            font-size: 36px;
+        }
+
+        .message {
+            margin-top: 3rem;
+            font-size: 24px;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:white;">
+        <div class="cizik"></div>
+        <div class="yuvarlak">404</div>
+        <div class="er">Er...</div>
+        <div class="cong">Tebrikler, interneti bozdun.</div>
+        <div class="message">
+            Bilmediğin sayfaları kurcalama butonlar senin için yeterli.
+            <br />
+        @Html.ActionLink("Hadi Eve","Index","Home")
+        </div>
+    </div>
+</body>
+</html>

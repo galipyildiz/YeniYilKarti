@@ -1,0 +1,61 @@
+﻿@model KartVM
+@{
+    ViewBag.Title = "Yeni Kart";
+    IEnumerable<string> images = ViewBag.Images;
+
+}
+@section css{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.css" integrity="sha512-SMXf5+HiyBHQjtjM3hqAZi0+H8KLyeOEA+gPBKqfOkgbuGTIsb0/sgT7jWQRsBt20TvnoUqM3cDbrIhv6gIiSg==" crossorigin="anonymous" />
+    <style>
+        .thumbnails li img {
+            width: 210px;
+        }
+    </style>
+}
+<div class="row ml-5">
+    <select class="image-picker show-html ">
+        @{
+            int count = 0;
+        }
+        @foreach (var image in images)
+        {
+            count++;
+            <option data-img-class="custom-class" data-img-src="@Url.Content(image)" value="@count"></option>
+        }
+    </select>
+</div>
+<div class="col ml-5">
+    @using (Html.BeginForm("Yeni", "Kart", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.ValidationSummary()
+        </div>
+        <div class="form-group row">
+            @Html.HiddenFor(x => x.Resimyolu, new { id = "resim", @class = "form-control mr-2", placeholder = "Resim Seçiniz" })
+            @Html.TextBoxFor(x => x.AliciAd, new { @class = "form-control mr-2", placeholder = "Alıcı Adı" })
+            @Html.TextBoxFor(x => x.GonderenAd, new { @class = "form-control mr-2", placeholder = "Gönderen Adı" })
+        </div>
+        <div class="form-group row">
+            @Html.TextAreaFor(x => x.Mesaj, new { rows = "10", @class = "form-control", placeholder = "Mesajınız" })
+        </div>
+        <button class="btn btn-success">Oluştur</button>
+    }
+</div>
+
+@section scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js" integrity="sha512-76tAVeQq8wkwtFWzKPU03XJGMF/mcLDeBgi9wIlRICXdkLNUYVBiOL3O/R9Bold+u0eN0OUftCcBTjFkchPyBg==" crossorigin="anonymous"></script>
+    <script>
+        $("select").imagepicker({
+            hide_select: true,
+            show_label: false
+        })
+        $("select").data('picker');
+        $('body').click(function () {
+            var src = $(".selected > .image_picker_image").attr("src")
+            $("#resim").val(src)
+        });
+        var src = $(".selected > .image_picker_image").attr("src");
+        $("#resim").val(src);
+    </script>
+}
