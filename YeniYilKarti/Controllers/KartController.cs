@@ -9,23 +9,24 @@ using YeniYilKarti.Models;
 
 namespace YeniYilKarti.Controllers
 {
-    [Authorize]
+    
     public class KartController : BaseController
     {
+        [Authorize]
         public ActionResult Index()
         {
             string id = User.Identity.GetUserId();
             List<Kart> kartlar = db.Kartlar.Where(x => x.UserId == id).ToList();
             return View(kartlar);
         }
-
+        [Authorize]
         public ActionResult Yeni()
         {
             //https://stackoverflow.com/questions/15989764/display-all-images-in-a-folder-in-mvc-with-a-foreach
             ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/Img")).Select(fn => "~/Img/" + Path.GetFileName(fn));
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Yeni(KartVM vm)
@@ -35,7 +36,7 @@ namespace YeniYilKarti.Controllers
             if (ModelState.IsValid)
             {
                 string Mesaj1 = vm.Mesaj.Length < 55 ? vm.Mesaj : vm.Mesaj.Substring(0, 55);
-                string Mesaj2 = vm.Mesaj.Length > 55 ? vm.Mesaj.Substring(55, 110) : null;
+                string Mesaj2 = vm.Mesaj.Length > 55 && vm.Mesaj.Length < 110 ? vm.Mesaj.Substring(55) : null;
                 string Mesaj3 = vm.Mesaj.Length > 110 ? vm.Mesaj.Substring(110) : null;
                 Kart kart = new Kart()
                 {
@@ -46,7 +47,7 @@ namespace YeniYilKarti.Controllers
                     Mesaj2 = Mesaj2,
                     Mesaj3 = Mesaj3,
                     UserId = id,
-                    Baslik = "Sevgili -" + vm.AliciAd
+                    Baslik = "Sevgili " + vm.AliciAd
                 };
                 db.Kartlar.Add(kart);
                 db.SaveChanges();
@@ -54,6 +55,7 @@ namespace YeniYilKarti.Controllers
             }
             return View(vm);
         }
+        [Authorize]
         public ActionResult Sil(int id)
         {
             Kart kart = db.Kartlar.Find(id);

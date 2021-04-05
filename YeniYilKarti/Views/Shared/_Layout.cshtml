@@ -9,6 +9,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @RenderSection("css", false)
+
 </head>
 <body>
     <nav class="p-3 pl-5 pr-5 navbar navbar-expand-lg navbar-light bg-transparent">
@@ -33,6 +34,14 @@
                         <i class="fas fa-file-signature"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <audio id="track">
+                        <source src="~/Img/We%20Wish%20You%20a%20Merry%20Christmas%20with%20Lyrics%20Christmas%20Carol%20%20Song%20Kids%20Love%20to%20Sing.mp3"  type="audio/mpeg" />
+                    </audio>
+                    <div id="player-container">
+                        <div id="play-pause" class="nav-link play">Play</div>
+                    </div>
+                </li>
             </ul>
             @Html.Partial("_LoginPartial")
         </div>
@@ -48,5 +57,26 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous"></script>
     @RenderSection("scripts", required: false)
+    <script>
+        var track = document.getElementById('track');
+
+        var controlBtn = document.getElementById('play-pause');
+
+        function playPause() {
+            if (track.paused) {
+                track.play();
+                controlBtn.textContent = "Pause";
+            } else {
+                track.pause();
+                controlBtn.textContent = "Play";
+            }
+        }
+
+        controlBtn.addEventListener("click", playPause);
+        track.addEventListener("ended", function () {
+            controlBtn.className = "play";
+        });
+
+    </script>
 </body>
 </html>

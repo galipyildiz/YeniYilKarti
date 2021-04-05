@@ -1,9 +1,10 @@
-﻿@model List<Kart>
+﻿@model Kart
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Paylas";
 }
 @section css{
     <style>
+
         .weather-card {
             margin: 60px auto;
             height: 540px;
@@ -18,10 +19,6 @@
                 height: 470px;
                 width: 100%;
                 overflow: hidden;
-                background: url('../../Img/christmas-door-2561032.png');
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center center;
                 text-align: center;
             }
 
@@ -176,19 +173,18 @@
                         }
     </style>
 }
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col kaynak">
+<div class="container">
+    <div class="row">
+        <div id="indir" class="col">
             <div class="weather-card one">
-                <div class="top" style="background: url( @item.ResimYolu );background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                <div class="top" style="background: url( @Model.ResimYolu ); background-repeat: no-repeat; background-size: cover; background-position: center center;">
                     <div class="wrapper">
                         <div class="mynav">
                             <a href=""><span class="lnr lnr-chevron-left"></span></a>
                             <a href=""><span class="lnr lnr-cog"></span></a>
                         </div>
-                        <h1 class="heading">@item.Baslik</h1>
-                        <p class="location">@item.Mesaj1  @item.Mesaj2  @item.Mesaj3</p>
+                        <h1 class="heading">@Model.Baslik</h1>
+                        <p class="location">@Model.Mesaj1  @Model.Mesaj2  @Model.Mesaj3</p>
                     </div>
                 </div>
                 <div class="bottom">
@@ -196,32 +192,15 @@
                         <ul class="forecast">
                             <li class="active">
                                 <span class="date">
-                                    <a href="@Url.Action("Indir","Kart",new { id=item.Id })"><i class="fas fa-download"></i></a>
-                                    <a href="#"><i class="show ml-3 fas fa-eye"></i></a>
-                                    <a href="@Url.Action("Paylas","Home",new { id=item.Id })"><i class="ml-3 fas fa-share-alt"></i></a>
+                                    <a href="@Url.Action("Indir","Kart",new { id=Model.Id })"><i class="fas fa-download"></i></a>
                                 </span>
-                                <span class="condition">-@item.GonderenAd</span>
+                                <span class="condition">-@Model.GonderenAd</span>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-    }
+    </div>
 </div>
-@section scripts{
-    <script>
-        $(".show").click(function (e) {
-            e.preventDefault();
-            var source = "<style>";
-            source += document.querySelector("style").innerHTML;
-            source += "<style>";
-            source += $(this).closest(".kaynak").html();
-            source = source.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            source = "<pre>" + source + "</pre>";
-            sourceWindow = window.open('', '_blank');
-            sourceWindow.document.write(source);
-            sourceWindow.document.close();
-        });
-    </script>
-}
+

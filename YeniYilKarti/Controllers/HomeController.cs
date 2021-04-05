@@ -17,9 +17,12 @@ namespace YeniYilKarti.Controllers
 
         public ActionResult Contact()
         {
-            
-
             return View();
+        }
+        public ActionResult Paylas(int id)
+        {
+            Kart kart = db.Kartlar.Find(id);
+            return View(kart);
         }
     }
 }

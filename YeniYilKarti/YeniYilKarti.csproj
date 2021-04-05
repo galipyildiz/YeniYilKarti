@@ -216,6 +216,7 @@
     <Content Include="Img\living-room-with-gifts-2561025.png" />
     <Content Include="Img\santa-riding-scooter-2561020.png" />
     <Content Include="Img\snowman-2561019.png" />
+    <Content Include="Img\We Wish You a Merry Christmas with Lyrics Christmas Carol  Song Kids Love to Sing.mp3" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -371,6 +372,7 @@
     <Content Include="Views\Kart\Yeni.cshtml" />
     <Content Include="Views\Kart\Indir.cshtml" />
     <Content Include="Views\Hata\NotFound.cshtml" />
+    <Content Include="Views\Home\Paylas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
