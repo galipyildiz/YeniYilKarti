@@ -9,7 +9,7 @@ using YeniYilKarti.Models;
 
 namespace YeniYilKarti.Controllers
 {
-    
+
     public class KartController : BaseController
     {
         [Authorize]
@@ -35,9 +35,11 @@ namespace YeniYilKarti.Controllers
             ViewBag.Images = Directory.EnumerateFiles(Server.MapPath("~/Img")).Select(fn => "~/Img/" + Path.GetFileName(fn));
             if (ModelState.IsValid)
             {
-                string Mesaj1 = vm.Mesaj.Length < 55 ? vm.Mesaj : vm.Mesaj.Substring(0, 55);
-                string Mesaj2 = vm.Mesaj.Length > 55 && vm.Mesaj.Length < 110 ? vm.Mesaj.Substring(55) : null;
-                string Mesaj3 = vm.Mesaj.Length > 110 ? vm.Mesaj.Substring(110) : null;
+                var bolum = vm.Mesaj.Length / 3;
+                var aralik = bolum * 2;
+                string Mesaj1 = vm.Mesaj.Substring(0, bolum);
+                string Mesaj2 = vm.Mesaj.Substring(bolum, bolum);
+                string Mesaj3 = vm.Mesaj.Substring(aralik);
                 Kart kart = new Kart()
                 {
                     AliciAd = vm.AliciAd,
